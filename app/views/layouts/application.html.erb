@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FeedbackAggregator</title>
+  <%= stylesheet_link_tag "application" %>
+</head>
+<body>
+<div>
+  <ul>
+    <li><%= link_to "Home", :controller => :feedbacks, :action => :list %></li>
+  </ul>
+</div>
+
+<%= yield %>
+
+</body>
+</html>

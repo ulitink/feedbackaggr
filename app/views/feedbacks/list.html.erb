@@ -1,0 +1,16 @@
+<div id="container">
+  <div id="feedbacks">
+    <h2>Feedbacks</h2>
+    <% @records.each do |record| %>
+      <div class="record">
+        <div class="record_title"><a class="record_title_href" href="<%= record.link %>"><%= record.title %></a></div>
+        <div class="record_body"><%= raw record.description %></div>
+        <div class="record_footer"><%= "Posted at #{record.posted_at} by #{record.author}" %></div>
+      </div>
+    <% end -%>
+  </div>
+  <div id="filters">
+    <h3>Filters</h3>
+    By tag, only unread etc.
+  </div>
+</div>
