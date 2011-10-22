@@ -2,15 +2,18 @@
 <html>
 <head>
   <title>FeedbackAggregator</title>
+  <%= javascript_include_tag :defaults %>
   <%= stylesheet_link_tag "application" %>
 </head>
 <body>
 <div>
-  <ul>
-    <li><%= link_to "Home", :controller => :feedbacks, :action => :list %></li>
-  </ul>
+  <div style='float:right'>
+      <%= render 'shared/auth_block' %>
+  </div>
+  <div style='clear: both'></div>
 </div>
-
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= yield %>
 
 </body>
