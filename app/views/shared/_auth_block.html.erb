@@ -1,14 +1,14 @@
 <% if user_signed_in? then %>
   <%= content_tag :div, "Logged in as #{current_user.email}" %>
   <%= link_to 'Log out', destroy_user_session_path, :method => :delete %>
-<% else -%>
+<% else %>
   <%= form_for('user', :url => user_session_path) do |f| %>
     <%= f.text_field :email %>
     <%= f.password_field :password %>
     <%= f.check_box :remember_me %>
     <%= f.label :remember_me %>
     <%= f.submit 'Sign in' %>
-  <% end -%>
+  <% end %>
   <%= link_to 'Sign up', new_user_registration_path %>
   <%= link_to "Forgot your password?", new_password_path('user') %>
-<% end -%>
+<% end %>
