@@ -1,6 +1,6 @@
 class Feed < ActiveRecord::Base
 
-  FEED_LOADERS = {"rss_records" => FeedLoaders::RssRecordsLoader}
+  FEED_LOADERS = {'rss_records' => FeedLoaders::RssRecordsLoader, 'twitter_search' => FeedLoaders::TwitterLoader}
 
   has_many :records
 

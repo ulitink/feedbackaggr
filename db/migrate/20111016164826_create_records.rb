@@ -5,7 +5,7 @@ class CreateRecords < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.string :link
-      t.integer :feed_id
+      t.belongs_to :feed
       t.datetime :posted_at
       t.string :author 
     end
