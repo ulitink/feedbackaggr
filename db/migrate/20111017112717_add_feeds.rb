@@ -9,6 +9,10 @@ class AddFeeds < ActiveRecord::Migration
         :loader => 'twitter_search',
         :loader_arg => '@jetbrains'
     )
+    Feed.create!(
+        :loader => 'forum',
+        :loader_arg => 'http://devnet.jetbrains.com/community/feeds/threads?community=9778'
+    )
   end
 
   def self.down
