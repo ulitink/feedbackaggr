@@ -1,7 +1,10 @@
 class Record < ActiveRecord::Base
+
   STATUSES = [:unread, :in_progress, :resolved]
+
   belongs_to :feed
   belongs_to :user
+
 
   def status
     STATUSES[read_attribute(:status)]

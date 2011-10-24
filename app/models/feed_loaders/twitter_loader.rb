@@ -4,21 +4,19 @@ module FeedLoaders
 
   class TwitterLoader
 
-    def self.child_type
-      :record
-    end
-
     # Updates feed by executing twitter search by loader_arg
     # @param [Feed, #read] feed
     # @return [void]
-    def self.update_feed!(feed)
-      # TODO assert feed.type=twitter
+    def self.update_feed(feed)
+      unless feed.loader == 'twitter_search'
+        Rails.logger.error 'Wrong argument for TwitterLoader.update_feed. feed.id= '+feed.id
+        return
+      end
+
       search_str = feed.loader_arg
       search = Twitter::Search.new.contains(search_str)
       twits = search.fetch
-      feed.cached_at = DateTime.now
-      feed_records = feed.records
-      twits.each { |twit|
+      twits.each do |twit|
         guid = get_guid(twit)
         record = Record.find_by_guid guid
         if record.nil?
@@ -33,8 +31,9 @@ module FeedLoaders
           )
           record.save
         end
-        # TODO check that record content wasn't changed
-      }
+      end
+      feed.cached_at = DateTime.now
+      feed.save
     end
     
     private
@@ -42,6 +41,5 @@ module FeedLoaders
     def self.get_guid(twit)
       "twit/#{twit.from_user}/#{twit.id_str}"
     end
-  end # Class TwitterLoader
-
+  end
 end

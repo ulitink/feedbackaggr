@@ -3,18 +3,20 @@ module FeedLoaders
   require 'rss'
 
   class RssRecordsLoader
-    def self.child_type 
-      :record
-    end
+
     # Updates feed by reading rss content by url specified in loader_arg
+    #
     # @param [Feed, #read] feed
+    #
     # @return [void]
-    def self.update_feed!(feed)
+    def self.update_feed(feed)
+      unless feed.loader == 'rss_records'
+        Rails.logger.error 'Wrong argument for RssRecordsLoader.update_feed. feed.id= '+feed.id
+        return
+      end
       rss_text = Net::HTTP.get URI.parse(feed.loader_arg)
       rss = RSS::Parser.parse(rss_text)
-      feed.cached_at = DateTime.now
-      feed_records = feed.records
-      rss_records = rss.channel.items.each { |item|
+      rss.channel.items.each do |item|
         record = Record.find_by_guid item.guid.content
         if record.nil?
           record = Record.new(
@@ -28,15 +30,12 @@ module FeedLoaders
           )
           record.save
         end
-        # TODO check that record content wasn't changed
-      }
+      end
+      # TODO delete from cache remotely deleted records
+      feed.cached_at = DateTime.now
+      feed.save
     end
 
-  private
-
-    def self.feed_of_rss_item(item)
-      #item.
-    end
   end
 
 end
