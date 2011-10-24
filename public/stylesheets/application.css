@@ -8,22 +8,24 @@ body {
 
 #feedbacks {
   float: left;
-  width: 929px; /* body.width - #filters.width */
+  width: 879px; /* body.width - #filters.width */
 }
 #filters {
   float: right;
-  width: 150px;
+  width: 185px;
+  margin-left: 15px;
 }
 
 .record {
-  margin: 30px 10px;
+  margin: 25px 10px;
+  border-bottom: solid 1px;
 }
 .record_title_href {
   font: bold;
   text-decoration: none;
   color: #24b;
 }
-.record_description {
+.record_body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -32,7 +34,9 @@ body {
   font: italic;
   color: #777;
 }
-
+.record_status {
+  margin: 0px 0px 15px 0px;
+}
 .record_actions {
   display: inline;
 }

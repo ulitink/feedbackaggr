@@ -1,8 +1,8 @@
 <div class="record" id="record<%= record.id %>">
   <div class="record_title"><a class="record_title_href" href="<%= record.link %>"><%= record.title %></a></div>
   <div class="record_body"><%= raw record.description %></div>
-  <div class="record_footer"><%= "Posted at #{record.posted_at} by #{record.author}" %></div>
-  <div>
+  <div class="record_footer"><%= "Posted at #{record.posted_at.in_time_zone('Moscow').to_s(:short)} by #{record.author}" %></div>
+  <div class="record_status">
     <%# See Feed.STATUSES %>
     <%= button_to 'Mark Unresolved', { :action => 'update_status', :id => record, :status => 0}, :remote => true, :style => 'float: left;' unless record.status == :unread %>
     <%= button_to 'Mark In progress', { :action => 'update_status', :id => record, :status => 1}, :remote => true, :style => 'float: left;' unless record.status == :in_progress %>
