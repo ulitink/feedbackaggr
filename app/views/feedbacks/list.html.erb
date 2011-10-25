@@ -1,7 +1,9 @@
 <div id="container">
   <div id="feedbacks">
     <h2>Recent</h2>
+    <%= will_paginate @records %>
     <%= render :partial => 'record', :collection => @records %>
+    <%= will_paginate @records %>
   </div>
   <div id="filters">
     <h2>Filters</h2>

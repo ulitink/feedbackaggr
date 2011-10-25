@@ -1,8 +1,13 @@
 class FeedbacksController < ApplicationController
   def list
     feeds = Feed.all
-    feeds.each { |feed| feed.update_content }
-    @records = Record.all(:order => 'posted_at DESC')
+    #feeds.each { |feed| feed.update_content }
+    
+    @records = Record.paginate(:page => params[:page], :per_page => 5).order('posted_at DESC')
+  end
+
+  def update_posts
+    
   end
 
   def update_status
