@@ -3,11 +3,31 @@ class FeedbacksController < ApplicationController
     feeds = Feed.all
     #feeds.each { |feed| feed.update_content }
     
-    @records = Record.paginate(:page => params[:page], :per_page => 5).order('posted_at DESC')
+    @records = Record.paginate(:page => params[:page]).order('posted_at DESC')
   end
 
   def update_posts
-    
+    feeds = Feed.find_all_by_parent_id(nil)
+    feeds.each { |feed| feed.update_content }
+    #fake_record = Record.new(
+    #          :title => "FAKE RECORD",
+    #          :description => "It's really only for testing'",
+    #          :link => "",
+    #          :posted_at => DateTime.now,
+    #          :author => "kostya"
+    #      )
+    #fake_record.save
+    records = Record.paginate(:page => params[:page]).order('posted_at DESC')
+    record_ids = records.map { |r| r.id }
+    page_record_ids = params[:record_ids].split(',').map! { |s_id| s_id.to_i }
+    added_records = records.delete_if { |record| page_record_ids.include?(record.id) }
+    removed_records = (page_record_ids - record_ids).map! { |id| 'record' + id.to_s}
+    render :update do |page|
+      removed_records.each { |element_id| page.remove element_id }
+      added_records.each do |record|
+        page.insert_html(:top, 'feedback_list', render(:partial => 'record', :locals => { :record => record }))
+      end
+    end
   end
 
   def update_status

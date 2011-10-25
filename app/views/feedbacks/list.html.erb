@@ -2,7 +2,9 @@
   <div id="feedbacks">
     <h2>Recent</h2>
     <%= will_paginate @records %>
-    <%= render :partial => 'record', :collection => @records %>
+    <div id="feedback_list">
+      <%= render :partial => 'record', :collection => @records %>
+    </div>
     <%= will_paginate @records %>
   </div>
   <div id="filters">
@@ -11,4 +13,10 @@
     <br />
     TODO
   </div>
+  <script type="text/javascript">
+    document.observe("dom:loaded", function() {
+      // initially hide all containers for tab content
+      <%= remote_function :url => {:action => 'update_posts'}, :with => 'collect_record_ids()' %>
+    });
+  </script>
 </div>

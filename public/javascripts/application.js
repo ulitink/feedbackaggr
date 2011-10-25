@@ -1,2 +1,9 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+function collect_record_ids() {
+  var res = [];
+  $$('#feedbacks .record').each(function (record) {
+    if (record.id.startsWith('record')) {
+      res.push(record.id.substr(6));
+    }
+  });
+  return 'record_ids='+res.toString();
+}
