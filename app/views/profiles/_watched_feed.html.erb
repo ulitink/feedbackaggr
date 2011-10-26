@@ -1,0 +1,6 @@
+<div class="watched_feed" id="watched_feed<%= watched_feed.id %>">
+  <div class="watched_feed_type"><%= watched_feed.loader %></div>
+  <div class="watched_feed_arg"><%= watched_feed.loader_arg %></div>
+  <%= button_to 'Remove', { :action => 'remove_watched_feed', :id => watched_feed.id}, :remote => true, :style => 'float: right;'%>
+  <div style="clear: both"></div>
+</div>

@@ -8,7 +8,9 @@ class Feed < ActiveRecord::Base
 
   has_many :records
   has_many :child_feeds, :class_name => 'Feed', :foreign_key => 'parent_id'
+  has_and_belongs_to_many :users
 
+  validates_inclusion_of :loader, :in => STRATEGY_BY_LOADER.keys
   validates_format_of :loader_arg,
                       :with => /devnet.jetbrains.com\/community\/feeds\/threads\?community=\d+$/i,
                       :if => Proc.new { |feed| feed.loader == 'forum' }

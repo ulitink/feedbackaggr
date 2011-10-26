@@ -40,3 +40,16 @@ body {
 .record_actions {
   display: inline;
 }
+
+.watched_feed {
+  padding: 10px;
+  border-bottom: solid 1px;
+}
+.watched_feed_type {
+  font-weight: bold;
+  width: 150px;
+  float: left;
+}
+.watched_feed_arg {
+  float: left;
+}

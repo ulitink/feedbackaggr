@@ -1,0 +1,19 @@
+<h1>Edit profile</h1>
+<h2>Add feed to watched</h2>
+<%= form_for :feed, {:url => {:action => 'new_watched_feed'}, :remote => true} do |f| %>
+  Type:<%= f.text_field :loader_arg %><br />
+  Loader argument:<%= select :feed, :loader, Feed::STRATEGY_BY_LOADER.keys %><br />
+  <%= f.submit 'Add' %>
+<% end %>
+<div style="margin: 10px 0px;">
+Loader argument format: <br />
+'rss_records' => 'Posts RSS url (http://devnet.jetbrains.com/community/feeds/messages?thread=313817)'<br />
+'twitter_search' => 'Twitter search string (@jetbrains)'<br />
+'forum' => 'Forum threads RSS url (http://devnet.jetbrains.com/community/feeds/threads?community=9778)'<br />
+</div>
+<h2>Currently watched feeds</h2>
+<%= will_paginate(@watched_feeds) %>
+<div id="watched_feeds">
+  <%= render :partial => 'watched_feed', :collection => @watched_feeds %>
+</div>
+<%= will_paginate(@watched_feeds) %>
