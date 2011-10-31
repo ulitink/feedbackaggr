@@ -7,6 +7,7 @@ FeedbackAggr::Application.routes.draw do
 
   match '/feedbacks/update_status'
   match '/feedbacks/update_posts'
+  match '/feedbacks/update_filter'
   match '/profiles/edit'
   match '/profiles/new_watched_feed'
   match '/profiles/remove_watched_feed'

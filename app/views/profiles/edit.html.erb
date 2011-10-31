@@ -1,8 +1,8 @@
 <h1>Edit profile</h1>
 <h2>Add feed to watched</h2>
 <%= form_for :feed, {:url => {:action => 'new_watched_feed'}, :remote => true} do |f| %>
-  Type:<%= f.text_field :loader_arg %><br />
-  Loader argument:<%= select :feed, :loader, Feed::STRATEGY_BY_LOADER.keys %><br />
+  Type:<%= select :feed, :loader, Feed::STRATEGY_BY_LOADER.keys %><br />
+  Loader argument:<%= f.text_field :loader_arg %><br />
   <%= f.submit 'Add' %>
 <% end %>
 <div style="margin: 10px 0px;">

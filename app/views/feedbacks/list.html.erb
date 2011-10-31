@@ -1,4 +1,4 @@
-<div id="container">
+<div id="content">
   <div id="feedbacks">
     <h2>Recent</h2>
     <%= will_paginate @records %>
@@ -9,13 +9,16 @@
   </div>
   <div id="filters">
     <h2>Filters</h2>
-    By tag, only unread etc.
-    <br />
-    TODO
+    <%= form_for :filter, {:url => {:action => 'update_filter'}, :remote => true}, :html => {:id => 'filters_form'} do |f| %>
+      <% only_watched = @filters.nil? ? false : @filters[:only_watched] %>
+      <%= f.radio_button :only_watched, false, :checked => !only_watched, :disabled => !user_signed_in?, :onchange => "$('filters_form').submit()" %>
+      <%= f.label :only_watched, 'All' %><br />
+      <%= f.radio_button :only_watched, true, :checked => only_watched, :disabled => !user_signed_in?, :onchange => "$('filters_form').submit()"  %>
+      <%= f.label :only_watched, 'Only my' %><br />
+    <% end %>
   </div>
   <script type="text/javascript">
     document.observe("dom:loaded", function() {
-      // initially hide all containers for tab content
       <%= remote_function :url => {:action => 'update_posts'}, :with => 'collect_record_ids()' %>
     });
   </script>

@@ -1,9 +1,6 @@
 class FeedbacksController < ApplicationController
   def list
-    feeds = Feed.all
-    #feeds.each { |feed| feed.update_content }
-    
-    @records = Record.paginate(:page => params[:page]).order('posted_at DESC')
+    set_fields
   end
 
   def update_posts
@@ -25,7 +22,7 @@ class FeedbacksController < ApplicationController
     render :update do |page|
       removed_records.each { |element_id| page.remove element_id }
       added_records.each do |record|
-        page.insert_html(:top, 'feedback_list', render(:partial => 'record', :locals => { :record => record }))
+        page.insert_html(:top, 'feedback_list', :partial => 'record', :locals => { :record => record })
       end
     end
   end
@@ -36,7 +33,26 @@ class FeedbacksController < ApplicationController
     record.user = current_user
     record.save
     render :update do |page|
-      page.replace("record#{record.id}", render(:partial => 'record', :locals => { :record => record }))
+      page.replace("record#{record.id}", :partial => 'record', :locals => { :record => record })
+    end
+  end
+
+  def update_filter
+    set_fields
+    render :update do |page|
+      page.replace('content', :template => 'feedbacks/list')
+    end
+  end
+
+  private
+
+  def set_fields
+    if !params[:filter].nil? && params[:filter][:only_watched]=='true'
+      @records = current_user.watched_records(params[:page])
+      @filters = {:only_watched => true}
+    else
+      @records = Record.paginate(:page => params[:page]).order('posted_at DESC')
+      @filters = {:only_watched => false}
     end
   end
 
