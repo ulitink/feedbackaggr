@@ -6,14 +6,6 @@ class FeedbacksController < ApplicationController
   def update_posts
     feeds = Feed.find_all_by_parent_id(nil)
     feeds.each { |feed| feed.update_content }
-    #fake_record = Record.new(
-    #          :title => "FAKE RECORD",
-    #          :description => "It's really only for testing'",
-    #          :link => "",
-    #          :posted_at => DateTime.now,
-    #          :author => "kostya"
-    #      )
-    #fake_record.save
     records = Record.paginate(:page => params[:page]).order('posted_at DESC')
     record_ids = records.map { |r| r.id }
     page_record_ids = params[:record_ids].split(',').map! { |s_id| s_id.to_i }
@@ -33,6 +25,7 @@ class FeedbacksController < ApplicationController
     record.user = current_user
     record.save
     render :update do |page|
+      page.replace_html 'errors', error_messages_for(record)
       page.replace("record#{record.id}", :partial => 'record', :locals => { :record => record })
     end
   end
@@ -47,7 +40,7 @@ class FeedbacksController < ApplicationController
   private
 
   def set_fields
-    if !params[:filter].nil? && params[:filter][:only_watched]=='true'
+    if user_signed_in? && !params[:filter].nil? && params[:filter][:only_watched]=='true'
       @records = current_user.watched_records(params[:page])
       @filters = {:only_watched => true}
     else
