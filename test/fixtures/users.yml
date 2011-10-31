@@ -1,9 +1,10 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-php: {}
+phpstorm:
+  email: ulitin.k@gmail.com
+  encrypted_password: <%= Devise.friendly_token %> # $2a$10$3e9qHlucH2lMU/SqGePhLe85SkzWLYHN7cI8Vp/TsTQR8ttmH16ku # 123123
 
-two: {}
+jetbrains:
+  email: delmar.ru@gmail.com
+  encrypted_password: <%= Devise.friendly_token %>
+
+

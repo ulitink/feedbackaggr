@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  test "wrong email format" do
+    user = User.new
+    user.email = 'wrongemail'
+    user.encrypted_password = Devise.friendly_token
+    assert !user.save
   end
+
 end

@@ -9,6 +9,8 @@ gem 'pg', :require => 'pg'
 gem 'devise'
 gem 'twitter'
 gem 'will_paginate', '~> 3.0.2'
+gem 'dynamic_form'
+gem 'test-unit'
 
 # Use unicorn as the web server
 # gem 'unicorn'

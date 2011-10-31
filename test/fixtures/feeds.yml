@@ -1,0 +1,12 @@
+
+forum:
+  loader: forum
+  loader_arg: http://devnet.jetbrains.com/community/feeds/threads?community=9778
+
+thread:
+  loader: rss_records
+  loader_arg: http://devnet.jetbrains.com/community/feeds/messages?thread=313822
+
+twitter:
+  loader: twitter
+  loader_arg: '@jetbrains'
