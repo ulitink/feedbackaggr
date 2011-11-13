@@ -2,9 +2,10 @@
 phpstorm:
   email: ulitin.k@gmail.com
   encrypted_password: <%= Devise.friendly_token %> # $2a$10$3e9qHlucH2lMU/SqGePhLe85SkzWLYHN7cI8Vp/TsTQR8ttmH16ku # 123123
+  feeds: forum
 
 jetbrains:
-  email: delmar.ru@gmail.com
+  email: example@gmail.com
   encrypted_password: <%= Devise.friendly_token %>
 
 

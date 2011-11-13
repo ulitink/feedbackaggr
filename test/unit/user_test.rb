@@ -9,4 +9,11 @@ class UserTest < ActiveSupport::TestCase
     assert !user.save
   end
 
+  test "watched feed" do
+    user = users(:phpstorm)
+    watched_records = user.watched_records(1)
+    assert_equal watched_records.length, 1
+    assert_equal watched_records[0], records(:thread_1)
+  end
+
 end

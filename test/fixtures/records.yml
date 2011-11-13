@@ -1,0 +1,20 @@
+twit_1:
+  guid: "twit/mesirii/135668386410663936"
+  title: "@jetbrains"
+  description: '@debasishg Try @JetBrains #AppCode :)'
+  feed: twitter
+  status: 0
+
+twit_2:
+  guid: "twit/AntonTyutin/135464921889636352"
+  title: "@jetbrains"
+  description: '@elfelandcor вот в #phpstorm прочие возможности рефакторинга тоже радуют. настроен покупать со скидкой http://t.co/cYilVlgs @jetbrains #php'
+  feed: twitter
+  status: 0
+
+thread_1:
+  guid: "http://devnet.jetbrains.net/message/5366907?tstart=0#5366907"
+  title: "Re: so many unresolved variables and functions and types"
+  description: 'Some long text...'
+  feed: thread
+  status: 0

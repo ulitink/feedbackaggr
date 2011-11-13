@@ -6,6 +6,7 @@ forum:
 thread:
   loader: rss_records
   loader_arg: http://devnet.jetbrains.com/community/feeds/messages?thread=313822
+  parent: forum
 
 twitter:
   loader: twitter
